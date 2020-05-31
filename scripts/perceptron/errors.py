@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from algorithms.perceptron import Perceptron
 from data.data import Data
 
-x, y = Data().read_data()
+x, y = Data.read_data()
 ppn = Perceptron(0.1, 10)
 ppn.fit(x, y)
 

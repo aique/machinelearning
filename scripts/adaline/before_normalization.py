@@ -15,7 +15,7 @@ from plot.plot import Plot
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
 
-x, y = Data().read_data()
+x, y = Data.read_data()
 
 ada1 = Adaline(n_iter=10, eta=0.01).fit(x, y)
 ada2 = Adaline(n_iter=10, eta=0.0001).fit(x, y)

@@ -12,7 +12,7 @@ from plot.plot import Plot
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
 
-x, y = Data().read_data()
+x, y = Data.read_data()
 x = Plot.normalization(x)
 
 ada = Adaline(n_iter=15, eta=0.01).fit(x, y)

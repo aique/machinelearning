@@ -9,7 +9,7 @@ from plot.plot import Plot
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
 
-x, y = Data().read_data()
+x, y = Data.read_data()
 Plot.normalization(x)
 
 ada = AdalineSGD(n_iter=15, eta=0.01, random_state=1).fit(x, y)

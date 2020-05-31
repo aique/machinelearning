@@ -33,6 +33,8 @@ class AdalineSGD(object):
         self.eta = eta
         # épocas o iteraciones por el conjunto de entrenamiento
         self.n_iter = n_iter
+        # indica el estado de inicialización de los pesos
+        self.w_initialized = False
         # previene la formación de ciclos
         self.shuffle = shuffle
         # semilla para la generación aleatoria de pesos
