@@ -2,7 +2,7 @@
 Muestra los errores del perceptrón durante su entrenamiento.
 """
 import matplotlib.pyplot as plt
-from perceptron import Perceptron
+from algorithms.perceptron import Perceptron
 from data.data import Data
 
 x, y = Data().read_data()

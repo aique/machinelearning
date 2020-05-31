@@ -2,8 +2,8 @@
 Muestra el modelo de predicción deducido por el perceptrón
 """
 import matplotlib.pyplot as plt
-from perceptron import Perceptron
-from plot import Plot
+from algorithms.perceptron import Perceptron
+from plot.plot import Plot
 from data.data import Data
 
 x, y = Data().read_data()

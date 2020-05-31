@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib.colors import ListedColormap
-from adaline import Adaline
+from algorithms.adaline import Adaline
 
 
 class Plot(object):

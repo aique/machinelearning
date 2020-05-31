@@ -2,8 +2,8 @@
 Muestra el modelo de predicción deducido por el perceptrón
 """
 import matplotlib.pyplot as plt
-from adaline import Adaline
-from plot import Plot
+from algorithms.adaline import Adaline
+from plot.plot import Plot
 from data.data import Data
 
 x, y = Data().read_data()

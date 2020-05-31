@@ -3,9 +3,9 @@ Coste del algoritmo Adaline con gradiente estocástico
 """
 
 import matplotlib.pyplot as plt
-from adaline_sgd import AdalineSGD
+from algorithms.adaline_sgd import AdalineSGD
 from data.data import Data
-from plot import Plot
+from plot.plot import Plot
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
 
