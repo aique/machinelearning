@@ -9,9 +9,9 @@ Es necesario un rango de aprendizaje de 0.0001 para obtener valores aceptables.
 """
 
 import matplotlib.pyplot as plt
-from algorithms.adaline import Adaline
-from data.data import Data
-from plot.plot import Plot
+from chapter2.algorithms.adaline import Adaline
+from chapter2.data.data import Data
+from chapter2.plot.plot import Plot
 
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
 
