@@ -178,8 +178,6 @@ de entrenamiento, provocando una situación de **subajuste o underfitting**.
 Estos problemas se dan en modelos de decisión no lineales, y una estrategia de compensación es la denominada
 **regularización**.
 
-![Árbol de decisión](img/decision_tree.png)
-
 ### Kernelización
 
 Al enfrentarse a un problema no lineal, una de las estrategias para encontrar un modelo que se ajuste adecuadamente es
