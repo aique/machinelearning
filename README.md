@@ -48,6 +48,8 @@ con una función escalón en base a la etiqueta de los valores de entrada.
 La **convergencia** sólo está garantizada si las clases son linealmente separables y el rango de aprendizaje es 
 suficientemente pequeño.
 
+![Perceptrón con optimización de errores de clasificación](img/perceptron.png)
+
 #### Neuronas lineales adaptativas (Adaline)
 
 La diferencia con respecto al perceptrón reside en que los pesos se actualizan en base a una **función de activación 
@@ -78,6 +80,92 @@ Una de las ventajas de este modelo es que no sólo es capaz de **predecir la eti
 probabilidad** de que ésto ocurra. Por este motivo es un módelo popular para predicciones metereológicas o cálculo de
 probabilidades de que un paciente padezca una enfermedad concreta en función a determinados síntomas.
 
+#### Máquina de vectores de soporte
+
+Puede considerarse como una extensión del Perceptrón. Mientras que el objetivo del Perceptrón es minimizar los errores
+de clasificación, el objetivo de optimización de este modelo es maximizar el margen o distancia de los límites de 
+decisión.
+
+La ventaja de ampliar este margen es que estos modelos tienden a tener un error más bajo en la generalización, allí
+donde los modelos con márgenes más estrechos son más propensos al sobreajuste (éstos conceptos se desarrollan en el 
+siguiente apartado), como se puede ver en el siguiente ejemplo:
+
+![Máquina de vectores de soporte con optimización de margen de decisión](img/svm.png)
+
+Otro motivo para su utilización es que puede ser fácilmente kernelizada para resolver problemas de clasificación no 
+lineal, como se puede ver en el siguiente ejemplo:
+
+![Máquina de vectores de soporte kernelizada](img/svm_kernel.png)
+
+#### Árboles de decisión
+
+Utilizando el algoritmo de decisión, empezamos por la raíz y dividimos los datos en la característica que resulta en la
+mayor **ganancia de información** o **IG**.
+
+En un proceso iterativo, repetimos este procedimiento de división en cada nodo hijo hasta que las hojas sean puras. Esto
+producirá un árbol muy profundo que puede provocar sobreajuste, por lo que una buena opción es podar el árbol
+ajustándolo a una profundidad máxima. 
+
+Las medidas de impurezas o criterios de división que normalmente se utilizan en árboles de decisión binarios son:
+
+- Impureza de Gini
+- Entropía
+- Error de clasificación
+
+![Árbol de decisión](img/decision_tree.png)
+
+#### Combinar árboles de decisión mediante bosques aleatorios
+
+Un bosque aleatorio se puede considerar como un conjunto de árboles de decisión. La idea es promediar la decisión de 
+múltiples árboles que individualmente sufren una elevada varianza, para crear un modelo más robusto.
+
+A partir de una muestra aleatoria de tamaño **n** se crea un árbol de decisión, y así sucesivamente hasta llegar al 
+número total de árboles que componen el bosque. Al tratarse de una muestra aleatoria, existirá una gran diversidad entre
+los árboles que componen el bosque, y la clasificación se realizará por **mayoría de votos**.
+
+El único parámetro que debemos tener en cuenta para solucionar problemas de ajuste es el número de árboles. Cuanto más
+alto es éste número, el rendimiento será mejor a expensas de un mayor coste computacional. En menor medida, otros 
+parámetros a tener en cuenta son el tamaño de la muestra y el número de características a tener en cuenta para cada 
+división.
+
+![Bosque aleatorio](img/random_forest.png)
+
+#### K-vecinos más cercanos
+
+Se trata de un algoritmo vago, ya que en lugar de obtener una función discriminativa, memoriza el conjunto de datos de
+entrenamiento.
+
+Su estrategia es elegir una muestra y una distancia, encontrar los k-vecinos más cercanos dentro de esa distancia y 
+asignar una etiqueta a la muestra por mayoría de votos en base a la clasificación de sus vecinos.
+
+La principal ventaja es que carece de coste de entrenamiento y se adapta inmediatamente cuando se recogen nuevos datos 
+de entrenamiento. Sin embargo, el coste computacional crece linealmente con las nuevas muestras y el espacio de 
+almacenamiento puede llegar a ser un problema.
+
+La elección del número de vecinos y de la distancia para obtenerlos será crucial encontrando un buen equilibrio entre el
+sobreajuste y el subajuste.
+
+![K-vecinos más cercanos](img/knn.png)
+
+### Modelos paramétricos frente a no paramétricos
+
+En los **modelos paramétricos**, a partir de un conjunto de datos de entrenamiento obtenemos una función que pueda 
+clasificar nuevos datos sin necesidad del conjunto de datos de entrenamiento original. Algunos ejemplos son:
+
+- Perceptrón
+- Regresión logística
+- Máquina de vectores de soporte (SVM)
+
+Contrariamente, en los **modelos no paramétricos** el número de parámetros crece con los datos de entrenamiento, como se
+puede ver en:
+
+- Árboles de decisión
+- Bosques aleatorios
+- SVM kernelizada
+- K-vecinos más cercanos
+
+## Problemas de ajuste y estrategias
+
 ### Sobreajuste y regularización
 
 El sobreajuste es un problema común en el que un algoritmo funciona bien durante el entrenamiento pero no generaliza 
@@ -89,3 +177,24 @@ de entrenamiento, provocando una situación de **subajuste o underfitting**.
 
 Estos problemas se dan en modelos de decisión no lineales, y una estrategia de compensación es la denominada
 **regularización**.
+
+![Árbol de decisión](img/decision_tree.png)
+
+### Kernelización
+
+Al enfrentarse a un problema no lineal, una de las estrategias para encontrar un modelo que se ajuste adecuadamente es
+proyectar las características originales hacia un espacio de dimensiones mayores.
+
+Un ejemplo es transformar un conjunto de datos bidimensionales en un nuevo conjunto de características tridimensionales
+y encontrar un hiperplano lineal que se convierta en un límite de decisión, para volver a proyectar las características
+en el espacio original. 
+
+A continuación se muestran dos ejemplos de kernelización para resolver el clásico problema de clasificación de flores 
+Iris, en el primero, el parámetro **gamma** o parámetro de **corte** para la esfera Gaussiana tiene un valor bajo, lo
+que genera un modelo de límites más suaves:
+
+![Máquina de vectores de soporte con bajo valor de corte](img/svm_low_gamma.png)
+
+En el segundo ejemplo, este valor es más elevado, con lo que los límites son más ajustados:
+
+![Máquina de vectores de soporte con alto valor de corte](img/svm_high_gamma.png)
