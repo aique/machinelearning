@@ -188,7 +188,7 @@ y encontrar un hiperplano lineal que se convierta en un límite de decisión, pa
 en el espacio original. 
 
 A continuación se muestran dos ejemplos de kernelización para resolver el clásico problema de clasificación de flores 
-Iris, en el primero, el parámetro **gamma** o parámetro de **corte** para la esfera Gaussiana tiene un valor bajo, lo
+`Iris`, en el primero, el parámetro **gamma** o parámetro de **corte** para la esfera Gaussiana tiene un valor bajo, lo
 que genera un modelo de límites más suaves:
 
 ![Máquina de vectores de soporte con bajo valor de corte](img/svm_low_gamma.png)
@@ -196,3 +196,101 @@ que genera un modelo de límites más suaves:
 En el segundo ejemplo, este valor es más elevado, con lo que los límites son más ajustados:
 
 ![Máquina de vectores de soporte con alto valor de corte](img/svm_high_gamma.png)
+
+## Preprocesamiento de datos
+
+La cantidad y calidad de los datos con los que se entrena un algoritmo determinan lo bien que puede aprender. A 
+continuación se describen una serie de técnicas básicas para potenciar estas cualidades en la información manejada.
+
+### Tratar con datos ausentes
+
+Algunas muestras pueden carecer de uno o más valores, lo que puede provocar que el algoritmo no pueda manejar estas 
+muestras o bien genere resultados impredecibles. Las opciones para solventar este problema son:
+
+- **Eliminar muestras incompletas** - Este enfoque permitirá unos resultados previsibles, sin embargo eliminar 
+demasiadas muestras puede conllevar a resultados poco fiables o a la incapacidad para realizar una buna discriminación
+entre clases.
+
+- **Imputar valores ausentes** - Se utilizan distintas técnicas de interpolación (como la media o el valor más 
+frecuente de una característica concreta) para asignar un valor.
+
+### Trabajar con datos categóricos
+
+Tanto las características nominales (valores no numéricos sin relación de orden entre ellos) como las ordinales (valores
+no numéricos con una relación de orden entre ellos) se deberán transformar en valores enteros para poder ser procesados 
+por el algoritmo.
+
+En caso de las características nominales, una simple asignación de números enteros aleatorios a cada uno de los posibles
+valores podría producir resultados poco óptimos si el algoritmo interpreta que existe una relación de orden entre ellos.
+
+Una solución a este problema es la **codificación en caliente**, que crea una nueva característica ficticia  para cada
+valor único en la columna de características nominales.
+
+### Crear un conjunto de datos de entrenamiento y de prueba
+
+Por lo general no es interesante colocar demasiados datos en el conjunto de prueba, sin embargo, cuanto menos sea el
+tamaño de este conjunto, menos precisa será la estimación del error de generalización.
+
+Las proporciones que se utilizan con más frecuencia se encuentran dentro del rango 60:40-80:20, sin embargo para grandes
+conjuntos de datos el rango 90:10-99:1 podría ser adecuado.
+
+Es habitual entrenar al algoritmo con los datos de prueba una vez realizada la primera estimación para mejorar el
+rendimiento. Sin embargo, si el modelo es demasiado pequeño este rendimiento puede verse devaluado. Otro de los
+inconvenientes es que sin datos de prueba no se puede evaluar el modelo predictivo final.
+
+### Ajustar las características a la misma escala
+
+Los árboles de decisión y los bosques aleatorios son dos de los pocos algormitmos que no se ven afectados por la escala
+de las características. Sin embargo, la mayoría de ellos tenderán a ajustar sus pesos en torno a aquella característica
+que se encuentra en una escala mayor, ignorando el resto de características.
+
+Los dos enfoques más importantes en el ajuste de escalas son:
+
+- **Normalización min-max** - Reescalado de características en un rango de [0, 1], útil cuando se necesitan valores en
+un intervalo limitado.
+
+- **Estandarización** - Centra las características en torno a una media con una desviación estándar de 1, indicado para
+algoritmos con descenso de gradiente o para aquellos que inicialicen sus pesos a valores cercanos a 0, como la regresión
+logística y las SVM.
+
+La tabla siguiente muestra la diferencia entre las dos técnicas de escalado:
+
+| Entrada | Estanzarizada | Normalizada min-max |
+|---------|---------------|---------------------|
+| 0.0     | -1,46385      | 0.0                 |
+| 1.0     | -0,87831      | 0.2                 |
+| 2.0     | -0,29277      | 0.4                 |
+| 3.0     | 0,29277       | 0.6                 |
+| 4.0     | 0,87831       | 0.8                 |
+| 5.0     | 1,46385       | 1.0                 |
+
+### Seleccionar características significativas
+
+Cuando un modelo indica problemas de sobreajuste, las soluciones más frecuentes para reducir el error de la 
+generalización son las siguientes:
+
+- Recoger más datos de entrenamiento.
+- Introducir una penalización para la complejidad mediante la regularización.
+- Elegir un modelo más sencillo con menos parámetros.
+- Reducir la dimensionalidad de los datos.
+
+La **regularización** da como resultado unos valores menos extremos, mientras que con la **reducción de 
+dimensionalidad** se modificarán las características dando como resultado modelos menos complejos, lo que es
+especiamente útil en algoritmos que no aceptan regularización.
+
+Dentro de la reducción de dimensionalidad existen dos técnicas muy diferentes. Una es la **selección de
+características**, que elimina características en función de su relevancia, y otra es la **extracción de
+características**, que comprime las características en lugar de eliminarlas.
+
+Estas soluciones no sólo son aplicables a problemas de sobreajuste, también sirven para reducir la complejidad
+computacional durante el entrenamiento o minimizar los costes de recopilación de datos en caso de ser requerido.
+
+Un ejemplo de reducción de dimensionalidad es el proceso de selección de características llamado **SBS** o **selección
+secuencial hacia atrás**. Este algoritmo elimina secuencialmente cada una de las características y compara los
+resultados para determinar cuales de ellas son irrelevantes.
+
+Otro ejemplo es el uso de bosques aleatorios para determinar las características más relevantes en la generalización
+de un modelo predictivo y en qué porcentaje afectan a los resultados. Así, en el conjunto de datos `Wine`, podemos
+obtener los siguientes resultados:
+
+![Clasificación de características por importancia en el conjunto de datos Wine](img/wine_feature_importance.png)
