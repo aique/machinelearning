@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + '/../../data/iris.data', header=None)
+df = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + '/../../../data/iris.data', header=None)
 
 # extraer la longitud de sépalo y pétalo
 x = df.iloc[0:100, [0, 2]].values

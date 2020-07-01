@@ -294,3 +294,18 @@ de un modelo predictivo y en qué porcentaje afectan a los resultados. Así, en 
 obtener los siguientes resultados:
 
 ![Clasificación de características por importancia en el conjunto de datos Wine](img/wine_feature_importance.png)
+
+## Reducción de dimensionalidad
+
+A continuación se verán las tres técnicas fundamentales en la **extracción de características**, que permitirán resumir
+el contenido informativo de un conjunto de datos en otro de menor dimensión.
+
+Al igual que en la **selección de características**, estas técnicas serán útiles en la optimización del coste de
+almacenaje y del coste computacional de datos, además de mejorar el rendimiento productivo del algoritmo.
+
+Además, estas técnicas son especialmente idóneas trabajando con modelos sin regularizar.
+
+### Análisis de componentes principales (ACP)
+
+Encuentra las direcciones de varianza máxima en datos de alta dimensión y las proyecta en un nuevo subespacio con 
+dimensiones menores o iguales al original.

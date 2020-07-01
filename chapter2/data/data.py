@@ -7,7 +7,7 @@ class Data(object):
 
     @staticmethod
     def read_data():
-        df = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + '/iris.data', header=None)
+        df = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + '/../../data/iris.data', header=None)
 
         # obtener las etiquetas verdaderas de clase
         y = df.iloc[0:100, 4].values

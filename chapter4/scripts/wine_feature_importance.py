@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
-df_wine = df = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + '/../data/wine.data', header=None)
+df_wine = df = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + '/../../data/wine.data', header=None)
 feat_labels = df_wine.columns[1:]
 forest = RandomForestClassifier(n_estimators=500,
                                 random_state=1)
