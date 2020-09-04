@@ -241,6 +241,7 @@ inconvenientes es que sin datos de prueba no se puede evaluar el modelo predicti
 ### Ajustar las características a la misma escala
 
 Los árboles de decisión y los bosques aleatorios son dos de los pocos algormitmos que no se ven afectados por la escala
+Los árboles de decisión y los bosques aleatorios son dos de los pocos algormitmos que no se ven afectados por la escala
 de las características. Sin embargo, la mayoría de ellos tenderán a ajustar sus pesos en torno a aquella característica
 que se encuentra en una escala mayor, ignorando el resto de características.
 
@@ -309,3 +310,14 @@ Además, estas técnicas son especialmente idóneas trabajando con modelos sin r
 
 Encuentra las direcciones de varianza máxima en datos de alta dimensión y las proyecta en un nuevo subespacio con 
 dimensiones menores o iguales al original.
+
+### Análisis discriminante lineal (ADL)
+
+Encuentra el subespacio de características que optimice la divisibilidad de las clases. A diferencia del anterior, este
+es un algoritmo supervisado.
+
+### ACP con kernels para mapeos no lineales
+
+Si tratamos con problemas no lineales, las dos alternativas anteriores no serán la mejor elección. Mediante esta técnica
+proyectaremos el problema en un nuevo espacio donde las clases pasan a ser separables linealmente, para luego aplicar el
+ACP. 
