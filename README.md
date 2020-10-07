@@ -324,3 +324,30 @@ ACP.
 
 ## Evaluación de modelos y ajuste de hiperparámetros
 
+Uno de los pasos clave en la creación de un modelo de aprendizaje automático es estimar su rendimiento en datos no
+vistos previamente. Un modelo puede sufrir subajuste (sesgo elevado) si es demasiado simple, o sobreajuste (alta 
+varianza) si es demasiado complejo. Para encontrar una compensación sesgo-varianza adecuada se utilizan los siguientes
+métodos.
+
+### Validación cruzada con retención
+
+Mediante el método de retención, dividimos el conjunto de datos en un conjunto de prueba y otro de entrenamiento. En 
+aplicaciones de aprendizaje automático ajustar y comparar diferentes parámetros para mejorar el rendimiento (este 
+proceso se conoce como **selección de modelos**). Sin embargo, si reutilizamos el mismo conjunto de datos de prueba,
+terminará formando parte de los datos de entrenamiento.
+
+Una solución es separar los datos de prueba en tres conjuntos: entrenamiento, validación y prueba. Será sobre el 
+conjunto de validación sobre el que se realizará la selección de modelos.
+
+Un inconveniente de este método es que la estimación del rendimiento puede ser muy sensible a cómo se divida el conjunto
+de entrenamiento en los subconjuntos de validación y de entrenamiento.
+
+### Validación cruzada de k iteraciones
+
+Dividimos aleatoriamente el conjunto de datos de entrenamiento en k iteraciones sin reemplazo, donde k - 1 iteraciones 
+se utilizan para el entrenamiento y una para la evaluación. Este proceso se repite k veces para obtener k modelos y 
+estimaciones de rendimiento. Después se calcula el rendimiento medio de los modelos.
+
+Un buen valor estándar para k es 10, sin embargo, trabajando con conjuntos relativamente pequeños puede ser útil 
+aumentar el número de iteraciones, aunque aumentar este valor provocará un tiempo de ejecución del algoritmo. Por otro 
+lado, para conjuntos grandes de datos un valor de 5 puede ser adecuado y evitar un alto coste computacional.
