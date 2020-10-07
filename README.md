@@ -320,4 +320,7 @@ es un algoritmo supervisado.
 
 Si tratamos con problemas no lineales, las dos alternativas anteriores no serán la mejor elección. Mediante esta técnica
 proyectaremos el problema en un nuevo espacio donde las clases pasan a ser separables linealmente, para luego aplicar el
-ACP. 
+ACP.
+
+## Evaluación de modelos y ajuste de hiperparámetros
+
