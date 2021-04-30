@@ -351,3 +351,9 @@ estimaciones de rendimiento. Después se calcula el rendimiento medio de los mod
 Un buen valor estándar para k es 10, sin embargo, trabajando con conjuntos relativamente pequeños puede ser útil 
 aumentar el número de iteraciones, aunque aumentar este valor provocará un tiempo de ejecución del algoritmo. Por otro 
 lado, para conjuntos grandes de datos un valor de 5 puede ser adecuado y evitar un alto coste computacional.
+
+## Depurar algoritmos
+
+Dos herramientas pueden ayudar a mejprar el rendimiento de un algoritmo de aprendizaje: **curvas de aprendizaje** y
+**curvas de validación**. La primera permite evaluar si exiten problemas de sobreajuste (alta varianza) o subajuste
+(sesgo elevado), mientras que la segunda posibilita la corrección de dichos problemas.
