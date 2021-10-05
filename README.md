@@ -357,3 +357,37 @@ lado, para conjuntos grandes de datos un valor de 5 puede ser adecuado y evitar 
 Dos herramientas pueden ayudar a mejprar el rendimiento de un algoritmo de aprendizaje: **curvas de aprendizaje** y
 **curvas de validación**. La primera permite evaluar si exiten problemas de sobreajuste (alta varianza) o subajuste
 (sesgo elevado), mientras que la segunda posibilita la corrección de dichos problemas.
+
+## Análisis de sentimiento
+
+Para analizar un texto debemos convertir las palabras en formato numérico. La técnica **bolsa de palabras** permite
+representar texto como vectores de características numéricas. Los pasos son los siguientes:
+
+- Crear un vocabulario a partir de un conjunto de documentos.
+- Construir el vector de características de cada documento en base a la frecuencia en que cada palabra del vocabulario
+aparece.
+
+En `Python` se puede utilizar la clase `CountVectorizer` para este fin.
+
+### Relevancia de las palabras
+
+Existen un conjunto de palabras que aparecen con frecuencia en los documentos pero que carecen de relevancia o
+importancia discriminatoria. Mediante la técnica `frecuencia de término - frecuencia inversa de documento` se pueden
+identificar estas palabras y asociarles un peso menos dentro del vector de características.
+
+### Limpiar datos textuales
+
+Éste sería el primer paso antes de comenzar con el análisis. En el ejemplo asociado a esta documentación, en el que se
+analizaban críticas de cine obtenidas de una página web, la limpieza de datos ha consistido en eliminar las marcaciones
+HTML y suprimir un conjunto de palabras identificadas como irrelevantes en cada uno de los documentos.
+
+Este proceso ha de adecuarse a cada caso, en función de los datos con los que se trabajará.
+
+### Procesar documentos en componentes léxicos
+
+Una vez limpiados los datos se ha de determinar en qué elementos individuales serán descompuestos. Por un lado se ha de
+definir la longitud en palabras que compondrán estos elementos individuales. Por otro, hay que tener en cuenta la
+**declinación de palabras**. El algoritmo de Porter, reduciendo la declinación de cada término a su raíz ha demostrado
+ser muy efectiva.
+
+Realizados todos estos procesos, sólo queda entrenar un modelo de regresión logística.
